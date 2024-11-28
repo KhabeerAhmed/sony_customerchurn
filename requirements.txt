@@ -12,3 +12,8 @@ pip
 python-dotenv
 scikit-learn
 -e .
+streamlit
+plotly
+kaleido
+scipy
+seaborn
