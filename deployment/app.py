@@ -2,6 +2,13 @@ import streamlit as st
 import pandas as pd
 import joblib
 import plotly.express as px
+from sklearn.metrics import classification_report, confusion_matrix
+
+st.set_page_config(
+    page_title="Customer Churn Prediction App",  # Title of the app
+    layout="wide",  # Use wide layout
+    initial_sidebar_state="expanded",  # Sidebar starts expanded
+)
 
 # Load the model
 model = joblib.load('../models/best_model.pkl')
@@ -76,6 +83,10 @@ if uploaded_file:
                 st.subheader("📊 Predictions")
                 st.dataframe(filtered_data)  # Display predictions in the second column
 
+            # Display Metrics
+            st.subheader("📊 Model Metrics")
+            col3, col4 = st.columns(2)
+
             # Add a pie chart for visualization
             churn_counts = filtered_data['Prediction'].value_counts()
             fig = px.pie(
@@ -88,6 +99,51 @@ if uploaded_file:
             fig.update_traces(hoverinfo="label+percent", textinfo="value")
             st.plotly_chart(fig)
 
+            with col3:
+                # Use the churn column from the uploaded data for true labels
+                true_labels = input_data['churn']
+
+                # Churn Rate
+                churn_rate = (true_labels.sum() / len(true_labels)) * 100
+
+                # Retention Rate
+                retention_rate = 100 - churn_rate
+
+                # Display the metrics using st.write
+                st.write("**Rate Metrics**")
+                st.write(f"- **Churn Rate:** {churn_rate:.2f}%")
+                st.write(f"- **Retention Rate:** {retention_rate:.2f}%")
+
+            with col4:
+                # Classification Report as a DataFrame
+                st.write("**Classification Metrics**")
+                
+                # Generate classification report as dictionary using true labels
+                report = classification_report(
+                    true_labels,
+                    filtered_data['Prediction'],
+                    output_dict=True
+                )
+                
+                # Convert to DataFrame
+                report_df = pd.DataFrame(report).transpose()
+                
+                # Display the DataFrame
+                st.dataframe(report_df.style.format(precision=2))
+
+            # Confusion Matrix
+            with st.expander("Confusion Matrix"):
+                st.write("Confusion Matrix")
+                cm = confusion_matrix(
+                    true_labels,
+                    filtered_data['Prediction']
+                )
+                st.dataframe(
+                    pd.DataFrame(cm, columns=["Predicted No Churn", "Predicted Churn"], 
+                                index=["Actual No Churn", "Actual Churn"]),
+                    use_container_width=True
+                )
+
             csv = filtered_data.to_csv(index=False).encode('utf-8')
             st.download_button(
                 label=f"📥 Download {len(filtered_data)} Predictions as CSV",
@@ -99,6 +155,7 @@ if uploaded_file:
 st.markdown("""
 <hr>
 <p style='text-align: center;'>
-    Developed by [Khabeer Ahmed](https://github.com/KhabeerAhmed) | (www.linkedin.com/in/khabeerahmed) © 2024
+    Developed by <a href="https://github.com/KhabeerAhmed" target="_blank">Khabeer Ahmed</a> | 
+    <a href="https://www.linkedin.com/in/khabeerahmed" target="_blank">LinkedIn</a> © 2024
 </p>
 """, unsafe_allow_html=True)
