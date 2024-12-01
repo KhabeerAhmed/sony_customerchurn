@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import joblib
@@ -11,7 +12,9 @@ st.set_page_config(
 )
 
 # Load the model
-model = joblib.load('../models/best_model.pkl')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Directory of app.py
+model_path = os.path.join(BASE_DIR, '../models/best_model.pkl')
+model = joblib.load(model_path)
 
 # Define required columns
 required_columns = [
