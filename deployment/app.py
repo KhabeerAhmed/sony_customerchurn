@@ -23,6 +23,7 @@ required_columns = [
     'customer service calls'
 ]
 
+# Sidebar Navigation
 st.sidebar.title("🗂 Navigation")
 st.sidebar.markdown("### 📌 Options")
 st.sidebar.markdown("- **🏠 Home**")
@@ -30,14 +31,27 @@ st.sidebar.markdown("- **📂 Upload Data**")
 st.sidebar.markdown("- **📊 Predictions**")
 st.sidebar.markdown("---")  # Horizontal divider
 
+# Add a link to the default test data in the sidebar
+st.sidebar.markdown("### 📝 Use Default Test Data")
+st.sidebar.markdown(
+    "[📥 Download Test Data](https://raw.githubusercontent.com/KhabeerAhmed/sony_customerchurn/refs/heads/main/data/processed/test_data.csv)"
+)
+
+
 # App Title and Description
 st.title("📊 Customer Churn Prediction App")
-st.markdown("Upload customer data to predict the likelihood of **churning**.")
+st.markdown("""
+This application was developed as part of a take-home assignment for recruitment of a data science position at **Sony Research**. The purpose of this app is to predict customer churn based on historical data and evaluate the performance of the predictive model. More exploratory data analysis and modeling can be found on my [Github](https://github.com/KhabeerAhmed/sony_customerchurn/tree/main) profile.
+
+For more details about the assignment, visit the link below:
+- [Customer Churn Prediction Assignment on Stratascratch](https://platform.stratascratch.com/data-projects/customer-churn-prediction)
+""")
 
 with st.expander("❓ How to Use This App"):
     st.write("1. Upload a CSV file with customer data.")
-    st.write("2. Ensure the file contains the mandatory columns.")
-    st.write("3. Review predictions and download results.")
+    st.write("2. Download the test data from the sidebar to obtain consistent results.")
+    st.write("3. Ensure the file contains the mandatory columns.")
+    st.write("4. Review predictions and download results.")
 
 # Display the mandatory columns message
 st.markdown("**Mandatory Columns Required for Prediction:**")
