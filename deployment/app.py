@@ -43,9 +43,9 @@ st.sidebar.markdown(
 
 
 # App Title and Description
-st.title("📊 Customer Churn Prediction App")
+st.title("📊 Customer Churn Prediction")
 st.markdown("""
-This application was developed as part of a take-home assignment for recruitment of a data science position at **Sony Research**. The purpose of this app is to predict customer churn based on historical data and evaluate the performance of the predictive model. More exploratory data analysis and modeling can be found on my [Github](https://github.com/KhabeerAhmed/sony_customerchurn/tree/main) profile.
+This application is created to predict customer churn at a telecom company, the dataset has been provided by **Sony Research**. The purpose of this app is to predict customer churn based on historical data and evaluate the performance of the predictive model. More exploratory data analysis and modeling can be found on my [Github](https://github.com/KhabeerAhmed/sony_customerchurn/tree/main) profile under 'notebooks' or 'reports'.
 
 For more details about the assignment, visit the link below:
 - [Customer Churn Prediction Assignment on Stratascratch](https://platform.stratascratch.com/data-projects/customer-churn-prediction)
