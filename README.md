@@ -17,7 +17,8 @@ Customer Churn Prediction (Sony Research Interview Question)
 │   ├── interim        <- Intermediate data that has been transformed.
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   └── raw            <- The original, immutable data dump.
-│
+├── deployment         <- app.py for Streamlit
+│    
 ├── docs               <- A default mkdocs project; see www.mkdocs.org for details
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
